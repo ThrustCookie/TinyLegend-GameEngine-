@@ -4,10 +4,6 @@
 #include <vector>
 #include <string> // debugging purposes only
 
-
-#define x d[0]
-#define y d[1]
-
 namespace engine {
 	
 	void draw_screen(display camera, map currentMap) {

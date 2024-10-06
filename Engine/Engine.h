@@ -19,99 +19,115 @@
 
 //a bunch of macros to make life easier
 
-#define xPos d[0] // figure out how to make this 'x' and not 'xPos'
-#define yPos d[1] // figure out how to make this 'y' and not 'yPos'
-//2D vector directions
+//Written Colour definitions for reading comprehension
+#define BLACK 0
+#define BLUE 1
+#define GREEN 2
+#define CYAN 3
+#define RED 4
+#define PURPLE 5
+#define ORANGE 6
+#define LIGHTGRAY 7
+#define GRAY 8
+#define LIGHTBLUE 9
+#define LIGHTGREEN 10
+#define LIGHTCYAN 11
+#define LIGHTRED 12
+#define LIGHTPURPLE 13
+#define LIGHTORANGE 14
+#define WHITE 15
+// 2D vector directions
 #define ZERO (0,0)
 #define ONE (1,1)
 #define UP (0,-1)
 #define LEFT (-1,0)
 #define DOWN (0,1)
 #define RIGHT (1,0)
-//used to shorten vector2 calls
+// Used to shorten vector2 calls
 #define elif else if
 
 namespace engine {
 	// A vector with two intiger coordinate numbers
 	struct vector2i {
-		int d[2];
+		int x;
+		int y;
 		
-		// BaseCondition delted
+		// BaseCondition
 		vector2i() {
-			xPos = 0;
-			yPos = 0;
+			x = 0;
+			y = 0;
 		}
 		// set an array equal to a coordinate
 		vector2i(int xNum, int yNum) {
-			xPos = xNum;
-			yPos = yNum;
+			x = xNum;
+			y = yNum;
 		};
 
 		vector2i add(vector2i adder) {
-			return vector2i(xPos + adder.xPos, yPos + adder.yPos);
+			return vector2i(x + adder.x, y + adder.y);
 		}
 
 		vector2i subtract(vector2i subtracter) {
-			return add(subtracter.multiply(-1));
+			return add(subtracter. multiply (-1));
 		}
 
 		vector2i multiply(int multiplier) {
-			return vector2i(xPos * multiplier, yPos * multiplier);
+			return vector2i(x * multiplier, y * multiplier);
 		}
 		vector2i multiply(vector2i multiplier) {
-			return vector2i(xPos * multiplier.xPos, yPos * multiplier.yPos);
+			return vector2i(x * multiplier.x, y * multiplier.y);
 		}
 		vector2i divide(int divisor) {
-			float floatX = xPos / divisor;
-			float floatY = yPos / divisor;
+			float floatX = x / divisor;
+			float floatY = y / divisor;
 
 			return vector2i(round(floatX), round(floatY));
 		}
 		vector2i divide(vector2i divisor) {
-			float floatX = xPos / divisor.xPos;
-			float floatY = yPos / divisor.yPos;
+			float floatX = x / divisor.x;
+			float floatY = y / divisor.y;
 
 			return vector2i(round(floatX), round(floatY));
 		}
 
 		//returns the current vector with values -1, 1 or 0
 		vector2i signed_vector() {
-			return vector2i((xPos != 0) ? xPos / xPos : 0, (yPos != 0) ? yPos / yPos : 0); // this might turn into a problem later when it returns zero
+			return vector2i((x != 0) ? x / std::abs(x) : 0, (y != 0) ? y / std::abs(y) : 0); // this might turn into a problem later when it returns zero
 		}
 
 		// returns true if one of the intiger pairs are equal
 		bool OR_Equal(vector2i match) const {
-			return (xPos == match.xPos || yPos == match.yPos);
+			return (x == match.x || y == match.y);
 		}
 		// returns true if both of the intiger pairs are equal
 		bool AND_Equal(vector2i match) const {
-			return (xPos == match.xPos && yPos == match.yPos);
+			return (x == match.x && y == match.y);
 		}
 
 		// returns true if one of vector1 variables are greater than vector2
 		bool OR_Greater(vector2i quantify) const {
-			return (xPos >= quantify.xPos || yPos >= quantify.yPos);
+			return (x >= quantify.x || y >= quantify.y);
 		}
 		// returns true if both of vector1 variables are greater than vector2
 		bool AND_Greater(vector2i quantify) const {
-			return (xPos >= quantify.xPos && yPos >= quantify.yPos);
+			return (x >= quantify.x && y >= quantify.y);
 		}
 
 		// returns true if one of vector1 variables are lesser than vector2
 		bool OR_Lesser(vector2i quantify) const {
-			return (xPos <= quantify.xPos || yPos <= quantify.yPos);
+			return (x <= quantify.x || y <= quantify.y);
 		}
 		// returns true if both of vector1 variables are lesser than vector2
 		bool AND_Lesser(vector2i quantify) const {
-			return (xPos <= quantify.xPos && yPos <= quantify.yPos);
+			return (x <= quantify.x && y <= quantify.y);
 		}
 
 		// return vector in string format
 		std::string to_string() {
 			std::string vectorDebug = "( ";
-			vectorDebug.append(std::to_string(xPos));
+			vectorDebug.append(std::to_string(x));
 			vectorDebug.append(", ");
-			vectorDebug.append(std::to_string(yPos));
+			vectorDebug.append(std::to_string(y));
 			vectorDebug.append(")");
 			return vectorDebug;
 		}
@@ -123,12 +139,12 @@ namespace engine {
 		image() {
 			imageMatrix = { {13} };
 		}
-		image(std::vector< std::vector<int> > newImageMatrix) {
+		image(std::vector< std::vector<int> > newImageMatrix) { // this currently doesn't work
 			imageMatrix = newImageMatrix;
 		}
 	};
 
-	//objectTypes
+	// objectTypes
 
 	struct objectEmpty {
 		vector2i position, size;

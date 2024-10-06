@@ -3,28 +3,6 @@
 #include <windows.h>
 #include <vector>
 
-//a bunch of macros to make life easier
-//used to shorten vector2 calls
-#define x d[0]
-#define y d[1]
-//Written Colour definitions for reading comprehension
-#define BLACK 0
-#define BLUE 1
-#define GREEN 2
-#define CYAN 3
-#define RED 4
-#define PURPLE 5
-#define ORANGE 6
-#define LIGHTGRAY 7
-#define GRAY 8
-#define LIGHTBLUE 9
-#define LIGHTGREEN 10
-#define LIGHTCYAN 11
-#define LIGHTRED 12
-#define LIGHTPURPLE 13
-#define LIGHTORANGE 14
-#define WHITE 15
-
 using namespace engine;
 map map1();
 
