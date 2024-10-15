@@ -15,6 +15,7 @@
 		object
 		objectType
 		objectName
+functions_use_underscore
 */
 
 //a bunch of macros to make life easier
@@ -147,7 +148,7 @@ namespace engine {
 	// objectTypes
 
 	struct objectEmpty {
-		vector2i position, size;
+		vector2i position, size; // rotate
 
 		objectEmpty() {
 			position = vector2i ZERO;
@@ -163,6 +164,10 @@ namespace engine {
 		vector2i end() {
 			return ( (size.OR_Equal(vector2i ZERO) ) ? vector2i ZERO : position.add(size.subtract(vector2i ONE)));
 		}
+
+		// add translate
+		// add rotate
+		// add scale
 	}; 
 
 	//there should be an object inbetween or a re-purposed object type with no collision
@@ -296,19 +301,11 @@ namespace engine {
 	// Prints out whatever is in the given camera
 	void draw_screen(display camera, map currentMap);
 	int calculate_pixel_colour(vector2i pixel, std::vector<objectStatic> objectList);
+
+	void set_pixel(vector2i pixel, int colourIndex);
 	// Prints out extra information under the screen
 	void draw_UI();
 
+	//
 	void calculate_movement(std::vector<objectDynamic>& dynamicObjectList, std::vector<entity>& entityList);
-
-	//consider moving these to their own libarary
-
-	//colour functions (for windows)
-	void colour(int colourIndex);
-	void colour_bg(int colourIndex);
-	
-	//debug information
-	void debug(int debugInfo, std::string prefaceInfo);
-	void debug(int debugInfo);
-	void debug(std::string debugString);
 }

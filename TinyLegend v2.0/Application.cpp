@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "CemiUtils.h"
 #include <iostream>
 #include <windows.h>
 #include <vector>
@@ -7,35 +8,26 @@ using namespace engine;
 map map1();
 
 int main() {
-	game TinyLegend;
-
-	display camera1(vector2i ZERO, vector2i(50, 25), LIGHTGRAY);
-
-	entity John(8, vector2i ZERO, vector2i ONE, vector2i UP, image({ {2} }));
-	John.hp = 3;
-	John.position = vector2i(camera1.position.add(camera1.size.divide(2)));
-	
-	map currentMap = map1();
-
-	TinyLegend.load_map(currentMap);
-	TinyLegend.currentMap.listEntity.insert(TinyLegend.currentMap.listEntity.begin(), John); //bandaid fix for now
-
-	/*
-	To-Do
-
-	add player
-	player input
-	move camera w/ player
-
-	enemy ai
-	shoot system
-
-	implement maps
-
-	implement player class or player speciality so characters can move across maps
-	*/
-	
 	//game_start(); 
+		// start with game and game name
+		game TinyLegend;
+
+		// make camera with position, size and colour
+		display camera1(vector2i ZERO, vector2i(50, 25), LIGHTGRAY);
+
+		// make player and character stats
+		entity John(8, vector2i ZERO, vector2i ONE, vector2i UP, image({ {2} }));
+		John.hp = 3;
+		John.position = vector2i(camera1.position.add(camera1.size.divide(2)));
+	
+		//load map
+		map currentMap = map1();
+		TinyLegend.load_map(currentMap);
+
+		//insert character to maplist
+		TinyLegend.currentMap.listEntity.insert(TinyLegend.currentMap.listEntity.begin(), John); //bandaid fix for now
+	
+	// main gameloop
 	while (TinyLegend.gameOver != true) {
 		draw_screen( camera1, TinyLegend.currentMap );
 		draw_UI();
@@ -49,12 +41,25 @@ int main() {
 	}
 	//game_end();
 
-	colour(7);
+	utils::colour(7);
 	
 	std::cout << "\n\n";
 	system("pause");
 	return 0;
-	
+
+	/*
+	To-Do
+
+	player input
+	move camera w/ player
+
+	enemy ai
+	shoot system
+
+	implement maps
+
+	implement player class or player speciality so characters can move across maps
+	*/
 }
 
 
@@ -110,4 +115,13 @@ map map1() {
 	};
 
 	return map1;
+}
+
+void read_input(char key) {
+	switch (key) {
+	case 'w': break;
+	case 'a': break;
+	case 's': break;
+	case 'd': break;
+	}
 }
